@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class Movement : MonoBehaviour {
+	public float speed = 3f;
+	public float jumpForce = 2000f;
 
 	private Rigidbody2D rigidbody2D;
 	
@@ -14,16 +16,19 @@ public class Movement : MonoBehaviour {
 	void Update () {
 		
 	}
-	
+
 	void FixedUpdate(){
 		float moveX = Input.GetAxis ("Horizontal");
-		
-		rigidbody2D.velocity = new Vector2 (moveX * 3f, rigidbody2D.velocity.y);
+		float newVelocity = moveX * speed;
+
+		rigidbody2D.velocity = new Vector2 (newVelocity, rigidbody2D.velocity.y);
 
 		bool jump = Input.GetButtonDown("Jump");
 		
 		if (jump) {
-			rigidbody2D.AddForce (new Vector2 (0f, 2000f));
+			rigidbody2D.AddForce (new Vector2 (0f, jumpForce));
 		}
+
+		SendMessageUpwards ("ChangeAnimSpeed", newVelocity);
 	}
 }

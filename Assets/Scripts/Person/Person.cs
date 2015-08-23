@@ -7,19 +7,18 @@ public class Person : MonoBehaviour {
 	public bool ragdollEnabled = false;
 	private List<GameObject> bodyParts = new List<GameObject>();
 	private GameObject noRagdoll;
+	private Animator anim;
 
 	void EnableRagdoll( bool enabled ){
 		foreach (GameObject part in bodyParts) {
 			HingeJoint2D joint = part.GetComponent<HingeJoint2D>();
-			JointAngleLimits2D limits = joint.limits;
-			limits.max = 0f;
-			limits.min = 0f;
-			joint.limits = limits;
 			joint.useLimits = !enabled;
 		}
 
 		noRagdoll.SetActive (!enabled);
 		ragdollEnabled = enabled;
+		if(enabled) anim.SetFloat ("Speed", 0f );
+
 	}
 
 	void SetBodyPartsAngleLimits(){
@@ -31,7 +30,11 @@ public class Person : MonoBehaviour {
 			joint.limits = limits;
 		}
 	}
-	
+
+	void ChangeAnimSpeed( float speed ){
+		anim.SetFloat ("Speed", Mathf.Abs( speed ) );
+	}
+
 	// Use this for initialization
 	void Start () {
 		// ignore body parts collisions with themselves
@@ -47,8 +50,10 @@ public class Person : MonoBehaviour {
 				noRagdoll = child.gameObject;
 		}
 
-		SetBodyPartsAngleLimits ();
-		EnableRagdoll (ragdollEnabled);
+		anim = GetComponent<Animator> ();
+
+		//SetBodyPartsAngleLimits ();
+		//EnableRagdoll (ragdollEnabled);
 	}
 	
 	// Update is called once per frame
