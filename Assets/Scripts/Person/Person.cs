@@ -17,6 +17,7 @@ public class Person : MonoBehaviour {
 
 		noRagdoll.SetActive (!enabled);
 		ragdollEnabled = enabled;
+		anim.enabled = !enabled;
 		if(enabled) anim.SetFloat ("Speed", 0f );
 
 	}
@@ -43,6 +44,8 @@ public class Person : MonoBehaviour {
 		foreach(Transform child in transform){
 			if(child.CompareTag("BodyPart"))
 				bodyParts.Add(child.gameObject);
+
+			Debug.Log ( child.transform.rotation );
 		}
 
 		foreach(Transform child in transform){
@@ -52,8 +55,8 @@ public class Person : MonoBehaviour {
 
 		anim = GetComponent<Animator> ();
 
-		//SetBodyPartsAngleLimits ();
-		//EnableRagdoll (ragdollEnabled);
+		SetBodyPartsAngleLimits ();
+		EnableRagdoll (ragdollEnabled);
 	}
 	
 	// Update is called once per frame
