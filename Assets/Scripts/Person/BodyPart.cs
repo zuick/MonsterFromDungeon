@@ -26,4 +26,9 @@ public class BodyPart : MonoBehaviour {
 		joint.useLimits = useLimits;		
 		useJointLimits = useLimits;		
 	}
+
+	void ChangeGravityScale( float value ){
+		Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D> ();
+		if( rigidbody2D ) rigidbody2D.gravityScale = value;
+	}
 }

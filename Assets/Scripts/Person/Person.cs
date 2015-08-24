@@ -7,6 +7,7 @@ public class Person : MonoBehaviour {
 	public bool ragdollEnabled = false;
 	public bool leftFace = true;
 
+	public bool grounded;
 	private CircleCollider2D circleCollider;
 	private Animator anim;
 
@@ -21,7 +22,11 @@ public class Person : MonoBehaviour {
 
 	}
 
-	void setLeftFacing( bool left ){
+	void SetGroundedState( bool grounded ){
+		grounded = grounded;
+	}
+
+	void SetLeftFacing( bool left ){
 		Vector3 scale = transform.localScale;
 		if (left) {
 			scale.x = 1f;
@@ -34,7 +39,7 @@ public class Person : MonoBehaviour {
 
 	void ChangeAnimSpeed( float speed ){
 		anim.SetFloat ("Speed", Mathf.Abs( speed ) );
-		if( speed != 0f ) setLeftFacing (speed < 0);
+		if( speed != 0f ) SetLeftFacing (speed < 0f);
 	}
 
 	// Use this for initialization
