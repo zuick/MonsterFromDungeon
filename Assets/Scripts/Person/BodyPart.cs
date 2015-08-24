@@ -45,4 +45,8 @@ public class BodyPart : MonoBehaviour {
 		Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D> ();
 		if( rigidbody2D ) rigidbody2D.gravityScale = value;
 	}
+
+	public void SetGrabbed(){
+		SendMessageUpwards ("EnableRagdoll", true);
+	}
 }
