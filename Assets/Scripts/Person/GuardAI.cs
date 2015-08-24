@@ -15,10 +15,12 @@ public class GuardAI : MonoBehaviour {
 	private CitizenMovement movementComponent;
 	private Person personComponent;
 	private Transform myHead;
+	private bool isAttacking;
 
 	// Use this for initialization
 	void Awake () 
 	{
+		isAttacking = false;
 		movementComponent = gameObject.GetComponent<CitizenMovement>();
 		personComponent = gameObject.GetComponent<Person>();
 		Transform[] childTransforms = GetComponentsInChildren<Transform>();
@@ -36,11 +38,32 @@ public class GuardAI : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void FixedUpdate () {
-		Transform whichEnemyInSight;
-		if (IsEnemyInSight(out whichEnemyInSight)) {
-			Debug.Log("I see " + whichEnemyInSight.name);
-			Debug.DrawRay(myHead.position, (whichEnemyInSight.position - myHead.position).normalized, Color.green);
+		if (!isAttacking) {
+			Transform whichEnemyInSight;
+			if (IsEnemyInSight(out whichEnemyInSight)) {
+				//Debug.Log("I see " + whichEnemyInSight.name);
+				//Debug.DrawRay(myHead.position, (whichEnemyInSight.position - myHead.position).normalized, Color.green);
+				StartCoroutine(StopAndAttack(whichEnemyInSight));
+			}
 		}
+	}
+
+	IEnumerator StopAndAttack(Transform target)
+	{
+		isAttacking = true;
+		CancelInvoke("ChangeMoving");
+		CancelInvoke("StopAndThink");
+		movementComponent.moveX = 0;
+		yield return new WaitForSeconds(1);
+
+		Vector2 direction = (target.position - transform.position).normalized; //Quaternion.LookRotation
+		Transform bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity) as Transform;
+		if (bullet != null) {
+			bullet.GetComponent<Rigidbody2D>().velocity = direction * 5;
+			//bullet.GetComponent<SpriteRenderer>().sortingLayerName = "Particles";
+		}
+		isAttacking = false;
+		StopAndThink();
 	}
 
 	void StopAndThink()
