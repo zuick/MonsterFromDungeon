@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public class Person : MonoBehaviour {
 
 	public bool ragdollEnabled = false;
-	
+	public bool leftFace = true;
+
 	private CircleCollider2D circleCollider;
 	private Animator anim;
 
@@ -20,8 +21,20 @@ public class Person : MonoBehaviour {
 
 	}
 
+	void setLeftFacing( bool left ){
+		Vector3 scale = transform.localScale;
+		if (left) {
+			scale.x = 1f;
+		} else {
+			scale.x = -1f;
+		}
+
+		transform.localScale = scale;
+	}
+
 	void ChangeAnimSpeed( float speed ){
 		anim.SetFloat ("Speed", Mathf.Abs( speed ) );
+		if( speed != 0f ) setLeftFacing (speed < 0);
 	}
 
 	// Use this for initialization
