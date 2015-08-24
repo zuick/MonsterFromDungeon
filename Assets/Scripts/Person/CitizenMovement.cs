@@ -6,6 +6,7 @@ public class CitizenMovement : MonoBehaviour {
 
 	[HideInInspector] public float moveX = 0;
 	
+	private bool grounded;
 	private Rigidbody2D rigidbody2D;
 	
 	// Use this for initialization
@@ -17,13 +18,19 @@ public class CitizenMovement : MonoBehaviour {
 	void Update () {
 		
 	}
-	
+
+	void SetGroundedState( bool value ){
+		Debug.Log (value);
+		grounded = value;
+	}
 	void FixedUpdate(){
-		//float moveX = Input.GetAxis ("Horizontal");
-		float newVelocity = moveX * speed;
+		if (grounded) {
+			float newVelocity = moveX * speed;
+			
+			rigidbody2D.velocity = new Vector2 (newVelocity, rigidbody2D.velocity.y);
+			
+			SendMessageUpwards ("ChangeAnimSpeed", newVelocity);
 		
-		rigidbody2D.velocity = new Vector2 (newVelocity, rigidbody2D.velocity.y);
-		
-		SendMessageUpwards ("ChangeAnimSpeed", newVelocity);
+		}
 	}
 }
