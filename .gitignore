@@ -3,6 +3,7 @@ Unity generated
 ===============
 Temp/
 Library/
+MonsterFromDungeonOSX.app/
 
 =====================================
 Visual Studio / MonoDevelop generated
@@ -18,7 +19,6 @@ obj/
 *.user
 *.unityproj
 *.booproj
-
 ============
 OS generated
 ============
