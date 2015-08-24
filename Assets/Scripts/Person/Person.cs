@@ -5,31 +5,19 @@ using System.Collections.Generic;
 public class Person : MonoBehaviour {
 
 	public bool ragdollEnabled = false;
-	private List<GameObject> bodyParts = new List<GameObject>();
-	private GameObject noRagdoll;
+	
+	private CircleCollider2D circleCollider;
 	private Animator anim;
 
 	void EnableRagdoll( bool enabled ){
-		foreach (GameObject part in bodyParts) {
-			HingeJoint2D joint = part.GetComponent<HingeJoint2D>();
-			joint.useLimits = !enabled;
-		}
+		BroadcastMessage ("UseJointLimits", !enabled);
 
-		noRagdoll.SetActive (!enabled);
-		ragdollEnabled = enabled;
+		circleCollider.enabled = !enabled;
 		anim.enabled = !enabled;
+
+		ragdollEnabled = enabled;
 		if(enabled) anim.SetFloat ("Speed", 0f );
 
-	}
-
-	void SetBodyPartsAngleLimits(){
-		foreach (GameObject part in bodyParts) {
-			HingeJoint2D joint = part.GetComponent<HingeJoint2D>();
-			JointAngleLimits2D limits = joint.limits;
-			limits.max = 0f;
-			limits.min = 0f;
-			joint.limits = limits;
-		}
 	}
 
 	void ChangeAnimSpeed( float speed ){
@@ -41,21 +29,9 @@ public class Person : MonoBehaviour {
 		// ignore body parts collisions with themselves
 		Physics2D.IgnoreLayerCollision (8, 8, true);
 
-		foreach(Transform child in transform){
-			if(child.CompareTag("BodyPart"))
-				bodyParts.Add(child.gameObject);
-
-			Debug.Log ( child.transform.rotation );
-		}
-
-		foreach(Transform child in transform){
-			if(child.CompareTag("noRagdoll"))
-				noRagdoll = child.gameObject;
-		}
-
 		anim = GetComponent<Animator> ();
+		circleCollider = GetComponent<CircleCollider2D> ();
 
-		SetBodyPartsAngleLimits ();
 		EnableRagdoll (ragdollEnabled);
 	}
 	
