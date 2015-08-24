@@ -38,6 +38,7 @@ public class GuardAI : MonoBehaviour {
 	void FixedUpdate () {
 		Transform whichEnemyInSight;
 		if (IsEnemyInSight(out whichEnemyInSight)) {
+			Debug.Log("I see " + whichEnemyInSight.name);
 			Debug.DrawRay(myHead.position, (whichEnemyInSight.position - myHead.position).normalized, Color.green);
 		}
 	}
