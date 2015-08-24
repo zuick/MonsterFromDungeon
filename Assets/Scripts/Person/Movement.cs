@@ -3,12 +3,13 @@ using System.Collections;
 
 public class Movement : MonoBehaviour {
 	public float speed = 3f;
-	public float jumpForce = 2000f;
 
 	private Rigidbody2D rigidbody2D;
-	
+	private Climbing climbing;
+
 	// Use this for initialization
 	void Start () {
+		climbing = GetComponent<Climbing> ();
 		rigidbody2D = GetComponent<Rigidbody2D> ();
 	}
 	
@@ -18,17 +19,14 @@ public class Movement : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-		float moveX = Input.GetAxis ("Horizontal");
-		float newVelocity = moveX * speed;
+		if (!climbing.climbing) {
 
-		rigidbody2D.velocity = new Vector2 (newVelocity, rigidbody2D.velocity.y);
-
-		bool jump = Input.GetButtonDown("Jump");
-		
-		if (jump) {
-			rigidbody2D.AddForce (new Vector2 (0f, jumpForce));
+			float moveX = Input.GetAxis ("Horizontal");
+			float newVelocity = moveX * speed;
+			
+			rigidbody2D.velocity = new Vector2 (newVelocity, rigidbody2D.velocity.y);
+			
+			SendMessageUpwards ("ChangeAnimSpeed", newVelocity);
 		}
-
-		SendMessageUpwards ("ChangeAnimSpeed", newVelocity);
 	}
 }

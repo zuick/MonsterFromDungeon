@@ -11,7 +11,8 @@ public class Person : MonoBehaviour {
 	private Animator anim;
 
 	void EnableRagdoll( bool enabled ){
-		BroadcastMessage ("UseJointLimits", !enabled);
+		BroadcastMessage ("EnableRagdollBody", enabled);
+		BroadcastMessage ("EnableRagdollBodyParts", enabled);
 
 		circleCollider.enabled = !enabled;
 		anim.enabled = !enabled;
@@ -21,7 +22,7 @@ public class Person : MonoBehaviour {
 
 	}
 
-	void setLeftFacing( bool left ){
+	void SetLeftFacing( bool left ){
 		Vector3 scale = transform.localScale;
 		if (left) {
 			leftFace = true;
@@ -36,7 +37,7 @@ public class Person : MonoBehaviour {
 
 	void ChangeAnimSpeed( float speed ){
 		anim.SetFloat ("Speed", Mathf.Abs( speed ) );
-		if( speed != 0f ) setLeftFacing (speed < 0);
+		if( speed != 0f ) SetLeftFacing (speed < 0f);
 	}
 
 	// Use this for initialization

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 4e793f3d36baad94d9eadcc82ef43ff0
-timeCreated: 1440414919
+timeCreated: 1440442705
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -10,6 +10,7 @@ TextureImporter:
     21300006: monster_3
     21300008: monster_4
     21300010: monster_5
+    21300012: monster_6
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -59,23 +60,33 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 45
+        y: 44
         width: 32
-        height: 31
+        height: 32
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: monster_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 112
+        y: 46
         width: 32
-        height: 45
+        height: 30
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: monster_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 44
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: monster_3
       rect:
         serializedVersion: 2
         x: 32
@@ -85,7 +96,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: monster_3
+    - name: monster_4
       rect:
         serializedVersion: 2
         x: 52
@@ -95,7 +106,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: monster_4
+    - name: monster_5
       rect:
         serializedVersion: 2
         x: 72
@@ -105,13 +116,13 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: monster_5
+    - name: monster_6
       rect:
         serializedVersion: 2
         x: 92
         y: 0
         width: 20
-        height: 73
+        height: 72
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
