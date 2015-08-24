@@ -20,9 +20,9 @@ public class CitizenMovement : MonoBehaviour {
 	}
 
 	void SetGroundedState( bool value ){
-		Debug.Log (value);
 		grounded = value;
 	}
+
 	void FixedUpdate(){
 		if (grounded) {
 			float newVelocity = moveX * speed;
