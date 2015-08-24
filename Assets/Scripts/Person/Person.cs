@@ -7,7 +7,6 @@ public class Person : MonoBehaviour {
 	public bool ragdollEnabled = false;
 	public bool leftFace = true;
 
-	public bool grounded;
 	private CircleCollider2D circleCollider;
 	private Animator anim;
 
@@ -20,10 +19,6 @@ public class Person : MonoBehaviour {
 		ragdollEnabled = enabled;
 		if(enabled) anim.SetFloat ("Speed", 0f );
 
-	}
-
-	void SetGroundedState( bool grounded ){
-		grounded = grounded;
 	}
 
 	void SetLeftFacing( bool left ){

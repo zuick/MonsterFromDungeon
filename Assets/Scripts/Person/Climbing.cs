@@ -33,6 +33,7 @@ public class Climbing : MonoBehaviour {
 		if (!grounded && value ) { // grounded become true
 			StopClimbing();
 		}
+		grounded = value;
 	}
 
 	void ChangeGravityScale( float value ){
@@ -63,8 +64,7 @@ public class Climbing : MonoBehaviour {
 		}
 
 		if (climbing) {
-			if( canClimb () ) rigidbody2D.velocity = new Vector2 ( rigidbody2D.velocity.x, moveY * climbingSpeed );
-			else StopClimbing();
+			rigidbody2D.velocity = new Vector2 ( rigidbody2D.velocity.x, moveY * climbingSpeed );
 		}
 	}
 
