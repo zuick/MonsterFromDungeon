@@ -11,7 +11,8 @@ public class Person : MonoBehaviour {
 	private Animator anim;
 
 	void EnableRagdoll( bool enabled ){
-		BroadcastMessage ("UseJointLimits", !enabled);
+		BroadcastMessage ("EnableRagdollBody", enabled);
+		BroadcastMessage ("EnableRagdollBodyParts", enabled);
 
 		circleCollider.enabled = !enabled;
 		anim.enabled = !enabled;
