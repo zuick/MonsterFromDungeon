@@ -10,7 +10,7 @@ public class Person : MonoBehaviour {
 	private CircleCollider2D circleCollider;
 	private Animator anim;
 
-	void EnableRagdoll( bool enabled ){
+	public void EnableRagdoll( bool enabled ){
 		BroadcastMessage ("EnableRagdollBody", enabled);
 		BroadcastMessage ("EnableRagdollBodyParts", enabled);
 
