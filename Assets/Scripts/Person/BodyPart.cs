@@ -23,7 +23,9 @@ public class BodyPart : MonoBehaviour {
 	}
 		
 	void UseJointLimits( bool useLimits ){
-		joint.useLimits = useLimits;		
+		if (joint != null) {
+			joint.useLimits = useLimits;		
+		}
 		useJointLimits = useLimits;		
 	}
 }

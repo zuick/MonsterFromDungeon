@@ -24,8 +24,10 @@ public class Person : MonoBehaviour {
 	void setLeftFacing( bool left ){
 		Vector3 scale = transform.localScale;
 		if (left) {
+			leftFace = true;
 			scale.x = 1f;
 		} else {
+			leftFace = false;
 			scale.x = -1f;
 		}
 
