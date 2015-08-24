@@ -17,6 +17,7 @@ public class Digging : MonoBehaviour {
 		moveX = Input.GetAxis("Horizontal");
 		moveY = Input.GetAxis("Vertical");
 		isMovementAttempted = !IsAlmostZero(moveX) || !IsAlmostZero(moveY);
+		if (!isMovementAttempted || objectToDig == null || !objectToDig.activeInHierarchy) StopDigging();
 		//grounded = GetComponent<Movement>().grounded;
 	}
 
@@ -55,7 +56,7 @@ public class Digging : MonoBehaviour {
 			objectToDig = null;
 	}
 	
-	void OnCollisionStay2D(Collision2D collision) 
+	void OnCollisionEnter2D(Collision2D collision) 
 	{
 		//moveX = Input.GetAxis ("Horizontal");
 		if (!(IsAlmostZero(moveX)^IsAlmostZero(moveY))) {
@@ -65,23 +66,25 @@ public class Digging : MonoBehaviour {
 
 		//if (grounded && collision.gameObject.tag == "DiggableWall") {
 		if (collision.gameObject.tag == "DiggableWall") {
-			if (isMovementAttempted) {
+			//if (isMovementAttempted) {
 				foreach (var contact in collision.contacts) {
 					if (moveX == -contact.normal.x && IsAlmostZero(contact.normal.y) || moveY == -contact.normal.y && IsAlmostZero(contact.normal.x)) {
 						StartOrContinueDigging(collision.gameObject);
 						break;
 					}
 				}
-			} else {
-				StopDigging();
-			}
+//			} else {
+//				Debug.Log("stopped digging - no movement");
+//				StopDigging();
+//			}
 		}
 	}
 	
-	void OnCollisionExit2D(Collision2D collision)
-	{
-		if (collision.gameObject == objectToDig) {
-			StopDigging();
-		}
-	}
+//	void OnCollisionExit2D(Collision2D collision)
+//	{
+//		if (collision.gameObject == objectToDig) {// && !gameObject.GetComponent<Collider2D>().IsTouching(objectToDig.GetComponent<Collider2D>())) {
+//			Debug.Log("stopped digging - no collision");
+//			StopDigging();
+//		}
+//	}
 }
