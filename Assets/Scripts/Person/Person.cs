@@ -20,6 +20,20 @@ public class Person : MonoBehaviour {
 		ragdollEnabled = enabled;
 		if(enabled) anim.SetFloat ("Speed", 0f );
 
+		if (enabled) {
+
+			GameObject[] lukes = GameObject.FindGameObjectsWithTag("Luke");
+			foreach (var luke in lukes) {
+				foreach(var collider in gameObject.GetComponents<Collider2D>()) {
+					Physics2D.IgnoreCollision(collider, luke.GetComponent<Collider2D>(), true);
+				}
+				foreach(var childCollider in gameObject.GetComponentsInChildren<Collider2D>()) {
+					Physics2D.IgnoreCollision(childCollider, luke.GetComponent<Collider2D>(), true);
+				}
+			}
+
+		}
+
 	}
 
 	void SetLeftFacing( bool left ){
