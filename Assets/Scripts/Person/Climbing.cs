@@ -20,12 +20,14 @@ public class Climbing : MonoBehaviour {
 
 		foreach (GameObject obj in objectsBehind) {
 			Renderer objRenderer = obj.transform.GetComponent<Renderer>();
-			if ( objRenderer ){
-				if( circleCollider.bounds.Intersects( objRenderer.bounds ) ){
-					return true;
-				}
-
+			float x1 = obj.transform.position.x - objRenderer.bounds.extents.x;
+			float y1 = obj.transform.position.y - objRenderer.bounds.extents.y;
+			float x2 = obj.transform.position.x + objRenderer.bounds.extents.x;
+			float y2 = obj.transform.position.y + objRenderer.bounds.extents.y;
+			if( x1 < transform.position.x && x2 > transform.position.x && y1 < transform.position.y && y2 > transform.position.y ){
+				return true;
 			}
+
 		}
 		return false;
 	}
